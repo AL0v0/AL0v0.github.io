@@ -28,7 +28,7 @@
 <meta property="og:description" content="基础不牢，地动山摇  这句话真的是至理名言。入门的时候入的不好，疯狂的踩坑以及遇到很多很多的问题。有很多理论知识和实战的知识都是欠缺的。于是就有了这个合集，去记录遇到的大大小小的问题和不断地做知识补充。就算是遇到了解决肯定还会再忘的，那就本地存个档把这些东西都记录下来。由于个人水平不够，本合集势必是又乱又蠢的了，希望各位读者见谅。 在这里要郑重感谢我的入门领路人兼好好好朋友tan 90°同学。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-22T07:08:21.000Z">
-<meta property="article:modified_time" content="2023-09-22T08:30:08.048Z">
+<meta property="article:modified_time" content="2023-09-22T08:41:20.287Z">
 <meta property="article:author" content="Ryuuuuko">
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="机器学习">
@@ -302,7 +302,8 @@
 
 <p>这句话真的是至理名言。入门的时候入的不好，疯狂的踩坑以及遇到很多很多的问题。有很多理论知识和实战的知识都是欠缺的。于是就有了这个合集，去记录遇到的大大小小的问题和不断地做知识补充。就算是遇到了解决肯定还会再忘的，那就本地存个档把这些东西都记录下来。由于个人水平不够，本合集势必是又乱又蠢的了，希望各位读者见谅。</p>
 <p>在这里要郑重感谢我的入门领路人兼好好好朋友tan 90°同学。每一次都会被tan 90°的奇思妙想和他强大的学习能力、动手能力深深折服，橙色橘猫头像同学是我永远的老师。</p>
-<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p><strong>CrossEntropyLoss</strong>（交叉熵）</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><hr>
+<p><strong>CrossEntropyLoss</strong>（交叉熵）</p>
 <p>分类任务里常用的损失函数。</p>
 <p><strong>Negative log likelihood loss</strong>（负对数似然损失）</p>
 <p>同样的，也是分类任务里常用的损失函数。</p>
@@ -317,18 +318,21 @@
 </blockquote>
 <p>因此，在实际训练中，如果做的是分类任务，且使用CrossEntropyLoss作为损失函数的话，神经网络的部分就没必要加入nn.Softmax或者nn.LogSoftmax等之类的，因为在CrossEntropyLoss已经内置了该功能</p>
 <p><strong>手撕交叉熵：</strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/SongGu1996/article/details/99056721">交叉熵损失函数（Cross Entropy Loss）_crossentropyloss-CSDN博客</a></p>
-<h2 id="对抗样本"><a href="#对抗样本" class="headerlink" title="对抗样本"></a>对抗样本</h2><p><strong>解决对一个对象多次BP更新时造成的RuntimeError: you can only change requires_grad flags of leaf variables.问题</strong></p>
+<hr>
+<h2 id="对抗样本"><a href="#对抗样本" class="headerlink" title="对抗样本"></a>对抗样本</h2><hr>
+<p><strong>解决对一个对象多次BP更新时造成的RuntimeError: you can only change requires_grad flags of leaf variables.问题</strong></p>
 <p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xjtu_yyl/article/details/120594713">解决对一个对象多次BP更新时造成的RuntimeError: you can only change requires_grad flags of leaf variables.问题_YulongYang1896的博客-CSDN博客</a></p>
 <p>在生成对抗样本的情境中，常常需要对一个对象（比如对抗扰动）进行多次的反向传播更新。</p>
 <p>报错原因：攻击函数返回值是同一个对象perturbation，该对象在一开始计算时被设置requires_grad &#x3D; True，在以上函数运行完一遍之后，计算图变成：perturbation -&gt; adv -&gt; pred -&gt; loss -&gt; perturbation. 也就是说，完成一遍更新之后，perturbation不再是叶子节点了，因此报错。</p>
 <p>解决办法：每轮更新得到的对抗样本或扰动在输入模型得到输出时，不要把这个对像作为模型输入，而是复制成一个新的张量，并且这个张量脱离计算图。这样在下一次重新进入函数开始新一轮计算时就不会对计算图造成混乱。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> perturbation.detach()</span><br></pre></td></tr></table></figure>
 
-
-
-
-<h2 id="常用链接："><a href="#常用链接：" class="headerlink" title="常用链接："></a>常用链接：</h2><p>1.image标签名称对应表： <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41770169/article/details/80482942">ImageNet图像库1000个类别名称（中文注释不断更新）_imagenet类别_有石为玉的博客-CSDN博客</a></p>
+<hr>
+<h2 id="常用链接："><a href="#常用链接：" class="headerlink" title="常用链接："></a>常用链接：</h2><hr>
+<p>1.image标签名称对应表： <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41770169/article/details/80482942">ImageNet图像库1000个类别名称（中文注释不断更新）_imagenet类别_有石为玉的博客-CSDN博客</a></p>
+<hr>
 <h2 id="一些常用的python处理函数"><a href="#一些常用的python处理函数" class="headerlink" title="一些常用的python处理函数"></a>一些常用的python处理函数</h2><p>我有健忘症（</p>
+<hr>
 <h4 id="pytorch张量拷贝"><a href="#pytorch张量拷贝" class="headerlink" title="pytorch张量拷贝"></a>pytorch张量拷贝</h4><table>
 <thead>
 <tr>
@@ -350,20 +354,21 @@
 </tbody></table>
 <p>clone()函数可以返回一个完全相同的tensor,新的tensor开辟新的内存，但是仍然留在计算图中</p>
 <p>detach()函数可以返回一个完全相同的tensor,新的tensor开辟与旧的tensor共享内存，新的tensor会脱离计算图，不会牵扯梯度计算。此外，一些原地操作(in-place, such as resize_ &#x2F; resize_as_ &#x2F; set_ &#x2F; transpose_) 在两者任意一个执行都会引发错误。</p>
+<hr>
 <h4 id="tensor转图片"><a href="#tensor转图片" class="headerlink" title="tensor转图片"></a>tensor转图片</h4><p>因此，在将tensor恢复成图片时，我们常用的是detach()函数。</p>
 <p>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">img_tensor = tensor.detach()</span><br><span class="line">out_img = img_tensor.squeeze(<span class="number">0</span>) <span class="comment">#裁掉batch size</span></span><br><span class="line"><span class="comment">#归一化的均值和方差</span></span><br><span class="line">channel_mean = [<span class="number">0.485</span>, <span class="number">0.456</span>, <span class="number">0.406</span>]</span><br><span class="line">channel_std = [<span class="number">0.229</span>, <span class="number">0.224</span>, <span class="number">0.225</span>]</span><br><span class="line"><span class="comment">#反归一化的均值和方差</span></span><br><span class="line">MEAN = [-mean/std <span class="keyword">for</span> mean, std <span class="keyword">in</span> <span class="built_in">zip</span>(channel_mean, channel_std)]</span><br><span class="line">STD = [<span class="number">1</span>/std <span class="keyword">for</span> std <span class="keyword">in</span> channel_std]</span><br><span class="line"><span class="comment">#tensor转图片</span></span><br><span class="line">denormalizer = transforms.Normalize(mean=MEAN, std=STD)</span><br><span class="line">inv_img = denormalizer(out_img)</span><br><span class="line">inv_img *= <span class="number">255</span></span><br><span class="line">inv_img = inv_img.permute(<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>)  <span class="comment">#记得转换维度</span></span><br><span class="line">inv_img = inv_img.numpy().astype(<span class="string">&quot;uint8&quot;</span>)</span><br><span class="line">plt.imshow(inv_img)</span><br><span class="line">inv_img = Image.fromarray(inv_img)</span><br><span class="line">inv_img.save(<span class="string">&quot;img.jpg&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-
-
+<hr>
 <h4 id="tensor与ndarray互转"><a href="#tensor与ndarray互转" class="headerlink" title="tensor与ndarray互转"></a>tensor与ndarray互转</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ndarry转tensor</span></span><br><span class="line">ten = torch.tensor(a,dtype=torch.<span class="built_in">float</span>)  <span class="comment">#dtype可选</span></span><br><span class="line">ten = torch.from_numpy(a)  </span><br></pre></td></tr></table></figure>
 
 <p>注意：</p>
 <p>torch.from_numpy()会指向相同的内存地址。修改原array变量ten也会变！！！</p>
 <p>torch.tensor()不会指向相同的内存地址，是深度copy。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果一个tensor的device是GPU，先使用如下命令转为CPU</span></span><br><span class="line">tensor.cpu()  </span><br><span class="line"><span class="comment"># 再使用tensor.numpy()进行转化</span></span><br><span class="line">tensor.data.numpy()</span><br><span class="line"><span class="comment"># tensor到GPU</span></span><br><span class="line">tensor.GPU()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果是普通的tensor</span></span><br><span class="line">直接</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果一个tensor的device是GPU，先使用如下命令转为CPU</span></span><br><span class="line">tensor.cpu()  </span><br><span class="line"><span class="comment"># 再使用tensor.numpy()进行转化</span></span><br><span class="line">a = tensor.data.numpy()</span><br><span class="line"><span class="comment"># tensor到GPU</span></span><br><span class="line">tensor.GPU()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果是普通的tensor</span></span><br><span class="line">a = tensor.numpy()</span><br></pre></td></tr></table></figure>
 
 <p>注意：<br>GPU上的tensor不能和numpy直接转换。必须先转换为CPU上的tensor</p>
+<hr>
 
         
       </div>

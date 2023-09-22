@@ -423,12 +423,13 @@
 
 这句话真的是至理名言。入门的时候入的不好，疯狂的踩坑以及遇到很多很多的问题。有很多理论知识和实战的知识都是欠缺的。于是就有了这个合集，去记录遇到的大大小小的问题和不断地做知识补充。就算是遇到了解决肯定还会再忘的，那就本地存个档把这些东西都记录下来。由于个人水平不够，本合集势必是又乱又蠢的了，希望各位读者见谅。
 在这里要郑重感谢我的入门领路人兼好好好朋友tan 90°同学。每一次都会被tan 90°的奇思妙想和他强大的学习能力、动手能力深深折服，橙色橘猫头像同学是我永远的老师。
-损失函数CrossEntropyLoss（交叉熵）
+损失函数
+CrossEntropyLoss（交叉熵）
 分类任务里常用的损失函数。
 Negative log likelihood loss（负对数似然损失）
 同样的，也是分类任务里常用的损失函数。
 两者都在torch.nn里，支持直接调用，调用的用法是：
-123loss_fc = torch.nn.CrossEntropyLoss() #torch.nn.NLLLoss()loss = loss_fc(output,label)#其中，output是模型的输出（模型预测得到的所有类的...  
+123loss_fc = torch.nn.CrossEntropyLoss() #torch.nn.NLLLoss()loss = loss_fc(output,label)#其中，output是模型的输出（模型预测得到的所有类...  
           </div>
         
       </div>
