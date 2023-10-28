@@ -28,7 +28,7 @@
 <meta property="og:description" content="基础不牢，地动山摇  这句话真的是至理名言。入门的时候入的不好，疯狂的踩坑以及遇到很多很多的问题。有很多理论知识和实战的知识都是欠缺的。于是就有了这个合集，去记录遇到的大大小小的问题和不断地做知识补充。就算是遇到了解决肯定还会再忘的，那就本地存个档把这些东西都记录下来。由于个人水平不够，本合集势必是又乱又蠢的了，希望各位读者见谅。 在这里要郑重感谢我的入门领路人兼好好好朋友tan 90°同学。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-22T07:08:21.000Z">
-<meta property="article:modified_time" content="2023-09-22T08:49:32.424Z">
+<meta property="article:modified_time" content="2023-10-27T13:46:26.587Z">
 <meta property="article:author" content="Ryuuuuko">
 <meta property="article:tag" content="人工智能">
 <meta property="article:tag" content="机器学习">
@@ -174,7 +174,7 @@
         
             <a class="category-link" href="/categories/AI%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/">
                 AI学习日志
-                <div class="category-count">2</div>
+                <div class="category-count">4</div>
             </a>
         
             <a class="category-link" href="/categories/%E6%9D%82%E8%B0%88/">
@@ -205,7 +205,7 @@
       
         <a class="archive-link" href="/archives/2023/10 ">
           October 2023 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">3 </div>
         </a>
       
         <a class="archive-link" href="/archives/2023/09 ">
@@ -224,6 +224,18 @@
       <h3 class="widget-title">Recent Posts</h3>
       <ul>
         
+          <a class="recent-link" href="/AI%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/%E5%90%8E%E9%97%A8%E6%94%BB%E5%87%BB%E9%98%B2%E5%BE%A1%E6%96%B9%E6%B3%95/" title="后门攻击防御方法" >
+            <div class="recent-link-text">
+              后门攻击防御方法
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/AI%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/CV-%E5%9B%BE%E5%83%8F%E5%8F%A0%E5%8A%A0%E5%99%AA%E5%A3%B0/" title="CV|图像叠加噪声" >
+            <div class="recent-link-text">
+              CV|图像叠加噪声
+            </div>
+          </a>
+        
           <a class="recent-link" href="/%E6%9D%82%E8%B0%88/jottings-23-10-05/" title="jottings-23.10.05" >
             <div class="recent-link-text">
               jottings-23.10.05
@@ -239,18 +251,6 @@
           <a class="recent-link" href="/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/autoformer/" title="论文笔记|autoformer" >
             <div class="recent-link-text">
               论文笔记|autoformer
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/AI%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/AI%E5%AD%A6%E4%B9%A0%E8%B8%A9%E5%9D%91%E5%90%88%E9%9B%86/" title="AI学习踩坑合集" >
-            <div class="recent-link-text">
-              AI学习踩坑合集
-            </div>
-          </a>
-        
-          <a class="recent-link" href="/%E6%94%B6%E6%AD%8C%E8%A1%A5%E5%BD%95%E8%AE%A1%E5%88%92/CytusII-%E6%94%B6%E6%AD%8C%E8%A1%A5%E5%BD%95%E8%AE%A1%E5%88%92-%E9%82%AE%E9%9B%86/" title="CytusII|收歌补录计划-邮集" >
-            <div class="recent-link-text">
-              CytusII|收歌补录计划-邮集
             </div>
           </a>
         
@@ -297,7 +297,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            1.2k words 
+            1.7k words 
           </div>
         </div>
         
@@ -337,6 +337,33 @@
 <p>解决办法：每轮更新得到的对抗样本或扰动在输入模型得到输出时，不要把这个对像作为模型输入，而是复制成一个新的张量，并且这个张量脱离计算图。这样在下一次重新进入函数开始新一轮计算时就不会对计算图造成混乱。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> perturbation.detach()</span><br></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="卷积层和池化层"><a href="#卷积层和池化层" class="headerlink" title="卷积层和池化层"></a>卷积层和池化层</h2><hr>
+<p>做卷积可以直接调用pytorch的内置函数。分两种</p>
+<p>1.构建卷积网络 – nn.Conv2d()</p>
+<p>torch.nn.Conv2d(<em>in_channels</em>, <em>out_channels</em>, <em>kernel_size</em>, <em>stride&#x3D;1</em>, <em>padding&#x3D;0</em>, <em>dilation&#x3D;1</em>, <em>groups&#x3D;1</em>, <em>bias&#x3D;True</em>, <em>padding_mode&#x3D;’zeros’</em>, <em>device&#x3D;None</em>, <em>dtype&#x3D;None</em>)</p>
+<p>in_channels:输入通道数</p>
+<p>out_channels:卷积核个数</p>
+<p>kernel_size:卷积核的shape，如果输入x是int，那么就是（x，x）</p>
+<p>stride:卷积核移动的步长</p>
+<p>padding:填充，（行数、列数）</p>
+<blockquote>
+<p>Padding即所谓的图像填充，后面的int型常数代表填充的多少（行数、列数），默认为0。需要注意的是这里的填充包括图像的上下左右，以padding &#x3D; 1为例，若原始图像大小为32x32，那么padding后的图像大小就变成了34x34，而不是33x33。<br>  Pytorch不同于Tensorflow的地方在于，Tensorflow提供的是padding的模式，比如same、valid，且不同模式对应了不同的输出图像尺寸计算公式。而Pytorch则需要手动输入padding的数量。</p>
+</blockquote>
+<p>dilation:这个参数决定了是否采用空洞卷积，默认为1（不采用）</p>
+<blockquote>
+<p>若dilation&#x3D;2：<a target="_blank" rel="noopener" href="https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md">https://github.com/vdumoulin/conv_arithmetic/blob/master/README.md</a></p>
+</blockquote>
+<p>bias:是否加偏置</p>
+<p>padding_mode:padding模式，默认是0填充</p>
+<blockquote>
+<p>zero：零填充（在矩阵的高、宽两个维度上用0进行填充，填充时将在一个维度的两边都进行填充）</p>
+<p>reflect：镜像填充（以矩阵边缘为对称轴，将矩阵中的元素对称的填充到最外围）</p>
+<p>replicate：重复填充（直接用边缘的像素值来填充）</p>
+<p>circular：循环填充</p>
+</blockquote>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sazass/article/details/116790155">https://blog.csdn.net/sazass/article/details/116790155</a></p>
+<p>2.调用卷积函数</p>
 <hr>
 <h2 id="常用链接："><a href="#常用链接：" class="headerlink" title="常用链接："></a>常用链接：</h2><hr>
 <p>1.image标签名称对应表： <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41770169/article/details/80482942">ImageNet图像库1000个类别名称（中文注释不断更新）_imagenet类别_有石为玉的博客-CSDN博客</a></p>
@@ -378,6 +405,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果一个tensor的device是GPU，先使用如下命令转为CPU</span></span><br><span class="line">tensor.cpu()  </span><br><span class="line"><span class="comment"># 再使用tensor.numpy()进行转化</span></span><br><span class="line">a = tensor.data.numpy()</span><br><span class="line"><span class="comment"># tensor到GPU</span></span><br><span class="line">tensor.GPU()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#如果是普通的tensor</span></span><br><span class="line">a = tensor.numpy()</span><br></pre></td></tr></table></figure>
 
 <p>注意：<br>GPU上的tensor不能和numpy直接转换。必须先转换为CPU上的tensor</p>
+<hr>
+<h4 id="latex公式语法"><a href="#latex公式语法" class="headerlink" title="latex公式语法"></a>latex公式语法</h4><p>latex公式写法参考链接：</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/110756681">LaTeX 公式篇 - 知乎 (zhihu.com)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/six_gods/article/details/112658088">【精选】【latex技巧】常用公式汇总（精简：））_latex公式_six_gods的博客-CSDN博客</a></p>
 <hr>
 
         
