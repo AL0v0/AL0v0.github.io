@@ -30,7 +30,6 @@ and (min-device-width : 768px){
         display: flex;
         align-items: center; /* 垂直居中 */
         justify-content: center; /* 水平居中 */
-        float: left;
     }
     
     .touxiang{
